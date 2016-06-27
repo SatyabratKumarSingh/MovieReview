@@ -12,7 +12,7 @@ import {
   View
 } from 'react-native';
 
-class MovieReviewApp extends Component {
+class MyMovieApp extends Component {
   render() {
     return (
       <View style={styles.container}>
@@ -50,4 +50,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('MovieReviewApp', () => MovieReviewApp);
+AppRegistry.registerComponent('MyMovieApp', () => MyMovieApp);
