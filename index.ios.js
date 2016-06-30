@@ -9,23 +9,19 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  WebView 
 } from 'react-native';
 
-class MyMovieApp extends Component {
+class MovieReview extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
+      <View style={{flex: 1}}>
+        <WebView
+          style={{flex:1}}
+          javaScriptEnabled={true}
+          source={{uri: 'https://www.youtube.com/embed/ZZ5LpwO-An4?rel=0&autoplay=0&showinfo=0&controls=0'}}
+        />
       </View>
     );
   }
@@ -50,4 +46,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('MyMovieApp', () => MyMovieApp);
+AppRegistry.registerComponent('MovieReview', () => MovieReview);

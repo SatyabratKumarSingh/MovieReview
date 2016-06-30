@@ -1,3 +1,3 @@
-rootProject.name = 'MyMovieApp'
+rootProject.name = 'MovieReview'
 
 include ':app'

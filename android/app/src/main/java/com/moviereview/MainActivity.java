@@ -1,4 +1,4 @@
-package com.mymovieapp;
+package com.moviereview;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactPackage;
@@ -15,7 +15,7 @@ public class MainActivity extends ReactActivity {
      */
     @Override
     protected String getMainComponentName() {
-        return "MyMovieApp";
+        return "MovieReview";
     }
 
     /**
