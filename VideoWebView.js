@@ -22,6 +22,7 @@ var ViewVideo = React.createClass({
     },
 
     render: function() {
+        var html = '<!DOCTYPE html><html><body><iframe width="300" height="300" src="http://www.youtube.com/embed/aRwrdbcAh2s"></iframe></body></html>';
 
         return (
             <View style={styles.container}>
@@ -33,7 +34,8 @@ var ViewVideo = React.createClass({
                 </Text>
                 <WebView
                     style={styles.frame}
-                    url={this.props.message}
+                    source={{html: html}}
+                    // url={this.props.message}
                     renderLoading={this.renderLoading}
                     renderError={this.renderError}
                     automaticallyAdjustContentInsets={false}

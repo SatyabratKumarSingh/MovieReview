@@ -3,7 +3,7 @@ package com.moviereview;
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
-
+import com.burnweb.rnwebview.RNWebViewPackage;  
 import java.util.Arrays;
 import java.util.List;
 
@@ -34,7 +34,8 @@ public class MainActivity extends ReactActivity {
     @Override
     protected List<ReactPackage> getPackages() {
         return Arrays.<ReactPackage>asList(
-            new MainReactPackage()
+            new MainReactPackage(),
+            new RNWebViewPackage()
         );
     }
 }

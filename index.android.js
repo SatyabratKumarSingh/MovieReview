@@ -7,11 +7,12 @@ import {
   Text,
   View,
   Navigator,
+  WebView,
   TouchableHighlight
 }from 'react-native';
 var Button = require('react-native-button');
 var VideoWebView = require('./VideoWebView');
-
+var WebViewAndroid = require('react-native-webview-android');
 var MovieReview = React.createClass({
 
   _renderScene(route, navigator) {
@@ -102,6 +103,7 @@ var Home = React.createClass({
     },
 
 	render() {
+                var html = '<!DOCTYPE html><html><body><iframe width="300" height="300" src="http://www.youtube.com/embed/lSPVcI2AYbs"></iframe></body></html>';
 
   	return (
     	<View style={ styles.container }>
@@ -112,7 +114,7 @@ var Home = React.createClass({
       	<TouchableHighlight onPress={ () => this.navigate('Login', 'This is the login page!') } style={ styles.button }>
       		<Text>GO TO Login</Text>
         </TouchableHighlight>
-        <TouchableHighlight onPress={ () => this.navigate('Play', 'https://www.youtube.com/watch?v=y2O44HDZWws') } style={ styles.button }>
+            <TouchableHighlight onPress={ () => this.navigate('Play', 'https://www.youtube.com/watch?v=RJa4kG1N3d0') } style={ styles.button }>
           <Text>GO TO Play</Text>
         </TouchableHighlight>
       </View>
@@ -144,6 +146,9 @@ var styles = StyleSheet.create({
     marginTop: 10,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+   containerWebView: {
+    flex: 1,
   }
 });
 
