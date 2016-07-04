@@ -36,7 +36,7 @@ var MovieReview = React.createClass({
 
   render: function() {
     return (
-      <Navigator
+      <Navigator style={ styles.navigate }
   			initialRoute={{ id:'Home', name: 'Home', component: Home }}
       	renderScene={ (route, navigator) => this._renderScene(route, navigator) }
    		/>
@@ -149,6 +149,10 @@ var styles = StyleSheet.create({
   },
    containerWebView: {
     flex: 1,
+  },
+  navigate:{
+      backgroundColor: '#2CC0B3',
+      height: 200
   }
 });
 
