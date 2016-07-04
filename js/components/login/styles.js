@@ -14,7 +14,7 @@ module.exports = StyleSheet.create({
         bottom: 0,
         left: 0,
         right: 0,
-        backgroundColor: '#453F41'
+        backgroundColor: '#33AA99'
     },
     shadow: {
     //    flex: 1,
@@ -27,7 +27,7 @@ module.exports = StyleSheet.create({
     bg: {
         flex: 1,
         //marginTop: deviceHeight/1.75,
-        backgroundColor: '#453F41',
+        backgroundColor: '#33AA99',
         paddingTop: 20,
         paddingLeft: 10,
         paddingRight: 10,

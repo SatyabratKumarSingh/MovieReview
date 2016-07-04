@@ -65,7 +65,7 @@ class Login extends Component {
                                         secureTextEntry={true}
                                     />
                                 </InputGroup>
-                                <Button style={{marginTop: 20, alignSelf: 'center'}} textStyle={{color: '#fff'}} onPress={() => this.replaceRoute('home')}>
+                                <Button  style={{marginTop: 20, alignSelf: 'center'}} textStyle={{fontSize:15, color: '#fff'}} onPress={() => this.replaceRoute('home')}>
                                     Login
                                 </Button>
                             </View>

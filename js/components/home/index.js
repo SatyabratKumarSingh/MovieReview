@@ -16,8 +16,8 @@ class Home extends Component {
 
     render() {
         return (
-            <Container style={{backgroundColor: '#565051'}}>
-                <Header style={{backgroundColor: '#322A2A'}} foregroundColor="#fff" >
+            <Container style={{backgroundColor: '#33AA99'}}>
+                <Header style={{backgroundColor: '#3D9970'}} foregroundColor="#fff" >
                     <Button disabled transparent>
                         <Icon name="ios-arrow-back" />
                     </Button>
@@ -32,7 +32,7 @@ class Home extends Component {
                 <Content padder>
                     <Text style={styles.text}>Welcome!</Text>
                     
-                    <Button style={styles.text} onPress={() => this.replaceRoute('login')}>
+                    <Button style={styles.text} textStyle={{fontSize:15, color: '#fff'}} onPress={() => this.replaceRoute('login')}>
                         Logout
                     </Button>
                 </Content>
