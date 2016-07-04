@@ -19,9 +19,9 @@ import Home from './components/home';
 var MovieReview = React.createClass({
     render() {
     return (
-      <Router sceneStyle={{backgroundColor:'#2CC0B3'}}>
-        <Scene key="root" style={ styles.navigate }>
-          <Scene key="home" style={ styles.navigate } component={Home} title="Home" initial={true} />
+      <Router sceneStyle={{backgroundColor:'#b2d8d9'}}>
+        <Scene key="root" navigationBarStyle={{backgroundColor:'#36A99E'} } titleStyle={{color:"white"}}>
+          <Scene key="home"  component={Home} title="Home" initial={true} />
           <Scene key="page" component={Page} title="Page" />
         </Scene>
       </Router>
