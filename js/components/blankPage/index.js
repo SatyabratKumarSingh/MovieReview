@@ -15,8 +15,8 @@ class BlankPage extends Component {
 
     render() {
         return (
-            <Container style={{backgroundColor: '#565051'}}>
-                <Header style={{backgroundColor: '#322A2A'}} foregroundColor="#fff">
+            <Container style={{backgroundColor: '#33AA99'}}>
+                <Header style={{backgroundColor: '#3D9970'}} foregroundColor="#fff">
                     <Button transparent onPress={() => this.popRoute()}>
                         <Icon name="ios-arrow-back" />
                     </Button>
