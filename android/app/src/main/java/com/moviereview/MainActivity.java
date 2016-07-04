@@ -1,9 +1,11 @@
 package com.moviereview;
 
 import com.facebook.react.ReactActivity;
+// import com.burnweb.rnwebview.RNWebViewPackage;
+import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
-import com.burnweb.rnwebview.RNWebViewPackage;  
+// import com.burnweb.rnwebview.RNWebViewPackage;
 import java.util.Arrays;
 import java.util.List;
 
@@ -35,7 +37,9 @@ public class MainActivity extends ReactActivity {
     protected List<ReactPackage> getPackages() {
         return Arrays.<ReactPackage>asList(
             new MainReactPackage(),
-            new RNWebViewPackage()
+          //  new RNWebViewPackage(),
+            new VectorIconsPackage()
+          //  new RNWebViewPackage()
         );
     }
 }

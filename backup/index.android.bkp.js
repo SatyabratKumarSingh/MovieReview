@@ -1,5 +1,5 @@
 'use strict';
-
+/*
 import React, { Component } from 'react';
 import {
   AppRegistry,
@@ -11,7 +11,7 @@ import {
   TouchableHighlight
 }from 'react-native';
 var VideoWebView = require('./VideoWebView');
-var WebViewAndroid = require('react-native-webview-android');
+// var WebViewAndroid = require('react-native-webview-android');
 var MovieReview = React.createClass({
 
   _renderScene(route, navigator) {
@@ -156,3 +156,10 @@ var styles = StyleSheet.create({
 });
 
 AppRegistry.registerComponent('MovieReview', () => MovieReview);
+
+------------
+
+import { AppRegistry } from 'react-native'
+import setup from './js/setup'
+
+*/
