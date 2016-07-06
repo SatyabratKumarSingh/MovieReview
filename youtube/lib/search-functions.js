@@ -14,7 +14,7 @@ var searchFunctions = {
     simpleSearch: function (searchString) {
         var params = {
             part: 'snippet',
-            maxResults: 50,
+            maxResults: 20,
             q: searchString
         };
 

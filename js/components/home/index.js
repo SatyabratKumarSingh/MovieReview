@@ -32,7 +32,7 @@ class Home extends Component {
             rowHasChanged: (row1, row2) => row1 !== row2,
           })
         };
-        this.itemsRef = this.getRef().child('items');
+        this.itemsRef = this.getRef().child('videos');
       }
       getRef() {
         return firebaseApp.database().ref();
@@ -65,7 +65,36 @@ class Home extends Component {
     replaceRoute(route) {
         this.props.replaceRoute(route);
     }
-
+    renderSeparator: function(
+          sectionID: number | string,
+          rowID: number | string,
+          adjacentRowHighlighted: boolean
+        ) {
+          var style = styles.rowSeparator;
+          if (adjacentRowHighlighted) {
+              style = [style, styles.rowSeparatorHide];
+          }
+          return (
+            <View key={'SEP_' + sectionID + '_' + rowID}  style={style}/>
+          );
+      },
+      selectMovie: function(movie: Object) {
+          /*if (Platform.OS === 'ios') {
+            this.props.navigator.push({
+              title: movie.title,
+              component: MovieScreen,
+              passProps: {movie},
+            });
+          } else {
+            dismissKeyboard();
+            this.props.navigator.push({
+              title: movie.title,
+              name: 'movie',
+              movie: movie,
+            });
+          }*/
+          console.log("select movie is called");
+        },
     render() {
         return (
             <Container style={{backgroundColor: '#33AA99'}}>
@@ -82,24 +111,36 @@ class Home extends Component {
                 </Header>
 
                 <Content padder>
-                   <ListView
-                      dataSource={this.state.dataSource}
-                      renderRow={this._renderItem.bind(this)}
-                      style={styles.listview}/>
+                <ListView
+                     ref="listview"
+                     renderSeparator={this.renderSeparator}
+                     dataSource={this.state.dataSource}
+                     renderRow={this.renderRow}
+                     automaticallyAdjustContentInsets={false}
+                     keyboardDismissMode="on-drag"
+                     keyboardShouldPersistTaps={true}
+                     showsVerticalScrollIndicator={false}
+                />;
                 </Content>
             </Container>
         )
     }
-    _renderItem(item) {
-
-    const onPress = () => {
-      console.log('row is pressed');
-    };
-
-    return (
-      <ListItem item={item} onPress={onPress} />
-    );
-  }
+        renderRow: function(
+            movie: Object,
+            sectionID: number | string,
+            rowID: number | string,
+            highlightRowFunc: (sectionID: ?number | string, rowID: ?number | string) => void,
+          ) {
+            return (
+              <MovieCell
+                key={movie.id}
+                onSelect={() => this.selectMovie(movie)}
+                onHighlight={() => highlightRowFunc(sectionID, rowID)}
+                onUnhighlight={() => highlightRowFunc(null, null)}
+                movie={movie}
+              />
+            );
+    },
 }
 
 function bindAction(dispatch) {

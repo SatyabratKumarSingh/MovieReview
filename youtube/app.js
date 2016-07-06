@@ -77,7 +77,7 @@ var videoKeys = ["title", "thumbnail", "createdDate"];
 function getYoutubeData(){
    async.waterfall([
     	function(callback){
-    		Youtube.searchFunctions.simpleSearch('upcoming trailers').then(function (data) {
+    		Youtube.searchFunctions.simpleSearch('new trailers').then(function (data) {
     		callback(null, data);
 		});
     },
