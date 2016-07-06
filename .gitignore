@@ -40,3 +40,4 @@ buck-out/
 android/app/libs
 android/keystores/debug.keystore
 youtube/config.js
+youtube/credentials.json
