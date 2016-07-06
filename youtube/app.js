@@ -29,7 +29,6 @@ opn(oauth.generateAuthUrl({
     access_type: "offline"
   , scope: ["https://www.googleapis.com/auth/youtube"]
 }));
-// oauth.setCredentials("ya29.CjAXA_r_zlk58QjcN3g9C3hcHKhSwjyIPa4Y1vCL7AuJAQoB8cWxCzkVftA9_jCLwKI");
 
 var Youtube = {
     searchFunctions: require('./lib/search-functions'),
@@ -40,14 +39,11 @@ var Youtube = {
 server.addPage("/oauth2callback", lien => {
     Logger.log("Trying to get the token using the following code: " + lien.query.code);
     oauth.getToken(lien.query.code, (err, tokens) => {
-
         if (err) {
             lien.lien(err, 400);
             return Logger.log(err);
         }
-
         Logger.log("Got the tokens.");
-		console.log(tokens);
         oauth.setCredentials(tokens);
 		getYoutubeData();
         lien.end("The video is being uploaded. Check out the logs in the terminal.");
@@ -61,33 +57,27 @@ var firebase = require('firebase');
 
 
 
-// firebase.initializeApp({
-// serviceAccount: {
-//     projectId:   FireConfig.projectId,
-//     clientEmail: FireConfig.clientEmail,
-//     privateKey:  FireConfig.privateKey
-//   },
-//   databaseURL: FireConfig.kDBBaseRef
-// });
-// 
-// var db = firebase.database();
-// 
-// 
-// var postResults = [];
-// var userResults = [];
-// var postDict = {};
-// var imageDict = {};
-// var userArray = [];
-// 
-// var postKeys = ["id", "title","url", "thumbnail", "createdDate"];
-// 	console.log(YConfig.API);
+firebase.initializeApp({
+serviceAccount: {
+    projectId:   FireConfig.projectId,
+    clientEmail: FireConfig.clientEmail,
+    privateKey:  FireConfig.privateKey
+  },
+  databaseURL: FireConfig.kDBBaseRef
+});
+
+var db = firebase.database();
+
+var videoDict = {};
+var userArray = [];
+
+var videoKeys = ["title", "thumbnail", "createdDate"];
 
 
 function getYoutubeData(){
    async.waterfall([
     	function(callback){
-    		Youtube.searchFunctions.simpleSearch('trailers').then(function (data) {
-    		console.log(data);
+    		Youtube.searchFunctions.simpleSearch('upcoming trailers').then(function (data) {
     		callback(null, data);
 		});
     },
@@ -97,20 +87,73 @@ function getYoutubeData(){
   ], function (err, result) {
   		if(err != null){
     	}
+    	saveData(result);
   });
 }
 
 function createLog(msg){
 	var startTime = firebase.database.ServerValue.TIMESTAMP;
-	log = {};
+	var log = {};
 	log['msg'] = msg;
 	log['time'] = startTime;
 	return log;
 }
 
+function saveData(result){
+
+	result.forEach(function(json){
+		var video = {};
+		var videoValue = [];
+		var vId = json.videoId;
+		var vTitle = json.title;
+		var vCreatedTime = Date.parse(json.publishedAt)/1000;
+		var thumbnails = json.thumbnails.default;
+	
+		videoValue.push(vTitle);
+		videoValue.push(thumbnails);
+		videoValue.push(vCreatedTime);
+
+
+// 		
+		for(var i=0; i<videoKeys.length;i++){
+			if(typeof videoValue[i] == 'undefined'){
+				video[videoValue[i]] = '';
+			}
+			else{
+				video[videoKeys[i]] = videoValue[i];
+			}
+		}
+		videoDict[vId] = video;
+
+	});
+	
+	// saving data to firebase
+	
+	async.series
+    ([  
+        function (callback)
+        {
+        	saveToDatabaseWithRef(FireConfig.kDBVideoRef,videoDict);   
+            callback();
+        }
+       
+    ]
+    ,
+    function(err) 
+    {
+    	if(err != null){
+    		saveLogs(FireConfig.kDBLogRef,createLog(err));
+    	}
+		saveLogs(FireConfig.kDBLogRef,createLog('saving data'));
+        console.log("Done !");
+    });
+}
+
+
 var onComplete = function(error) {
   if (error) {
     if(error != null){
+    		console.log(error);
     		saveLogs(FireConfig.kDBLogRef,createLog(error));
     	}
   } else {
@@ -119,9 +162,9 @@ var onComplete = function(error) {
   }
 };
 function saveToDatabaseWithRef(childRef, data){
-	var postRef = db.ref(childRef);
-	postRef.update(data);
-// 	postRef.update(data,onComplete);
+	var videoRef = db.ref(childRef);
+// 	videoRef.update(data);
+	videoRef.update(data,onComplete);
 
 }
 
