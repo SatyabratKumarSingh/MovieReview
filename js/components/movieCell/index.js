@@ -2,7 +2,7 @@
 
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-var {
+import {
   Image,
   Platform,
   StyleSheet,
@@ -20,6 +20,7 @@ var MovieCell = React.createClass({
    if (Platform.OS === 'android') {
      TouchableElement = TouchableNativeFeedback;
    }
+  //  console.log(this.props.movie.thumbnail);
    return (
      <View>
        <TouchableElement
@@ -27,16 +28,18 @@ var MovieCell = React.createClass({
          onShowUnderlay={this.props.onHighlight}
          onHideUnderlay={this.props.onUnhighlight}>
          <View style={styles.row}>
+         <View style={styles.textContainer}>
            <Image
-             source={getImageSource(this.props.movie, 'det')}
+             source={{uri:this.props.movie.thumbnail}}
              style={styles.cellImage}
            />
+          </View>
            <View style={styles.textContainer}>
              <Text style={styles.movieTitle} numberOfLines={2}>
                {this.props.movie.title}
              </Text>
              <Text style={styles.movieYear} numberOfLines={1}>
-               {this.props.movie.year}
+               {this.props.movie.createdDate}
                {' '}&bull;{' '}
              </Text>
            </View>

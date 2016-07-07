@@ -5,12 +5,12 @@ import {connect} from 'react-redux';
 import {Text, List, ListItem, Content} from 'native-base';
 import {closeDrawer} from '../../actions/drawer';
 import {replaceOrPushRoute} from '../../actions/route';
-import styles from "./style";
+import styles from "./styles";
 
 class SideBar extends Component {
 
     navigateTo(route) {
-        this.props.closeDrawer(); 
+        this.props.closeDrawer();
         this.props.replaceOrPushRoute(route);
     }
 

@@ -3,22 +3,35 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
-import {Container, Header, Title, Content, Text, Button, Icon } from 'native-base';
+import {Container, Header, Title, Content, Button, Icon } from 'native-base';
 import {openDrawer} from '../../actions/drawer';
 import {replaceRoute} from '../../actions/route';
 import styles from './styles';
+import MovieCell from '../movieCell/';
 
+import {
+  ActivityIndicator,
+  ListView,
+  Platform,
+  Text,
+  StyleSheet,
+  View
+} from 'react-native';
 const firebase = require('firebase');
-var FireConfig = require("../../youtube/config").fbase;
+var FireConfig = require("../../../youtube/config").fbase;
+
 // Initialize Firebase
+
+
 var config = {
     apiKey: FireConfig.apiKey,
     authDomain: FireConfig.authDomain,
     databaseURL: FireConfig.kDBBaseRef,
     storageBucket: FireConfig.storageBucket,
   };
-  firebase.initializeApp(config);
 
+  firebase.initializeApp(config);
+var db = firebase.database();
 // Create a reference with .ref() instead of new Firebase(url)
 const rootRef = firebase.database().ref();
 const itemsRef = rootRef.child(FireConfig.kDBVideoRef);
@@ -26,19 +39,24 @@ const itemsRef = rootRef.child(FireConfig.kDBVideoRef);
 
 class Home extends Component {
       constructor(props) {
+        console.log("constructor called");
         super(props);
         this.state = {
           dataSource: new ListView.DataSource({
             rowHasChanged: (row1, row2) => row1 !== row2,
           })
         };
-        this.itemsRef = this.getRef().child('videos');
+        this.itemsRef = rootRef.child('videos');
       }
+
       getRef() {
-        return firebaseApp.database().ref();
+        return firebase.database().ref();
       }
+
       listenForItems(itemsRef) {
+        console.log("listenForItems called");
       itemsRef.on('value', (snap) => {
+        console.log("here");
 
         // get children as an array
         var items = [];
@@ -46,9 +64,10 @@ class Home extends Component {
           items.push({
             title: child.val().title,
             createdDate : child.val().createdDate,
-            thumbnail: child.val().thumbnail.url,
+            thumbnail: child.val().thumbnail,
             _key: child.key
           });
+          console.log(items);
         });
 
         this.setState({
@@ -65,7 +84,7 @@ class Home extends Component {
     replaceRoute(route) {
         this.props.replaceRoute(route);
     }
-    renderSeparator: function(
+    renderSeparator(
           sectionID: number | string,
           rowID: number | string,
           adjacentRowHighlighted: boolean
@@ -77,8 +96,9 @@ class Home extends Component {
           return (
             <View key={'SEP_' + sectionID + '_' + rowID}  style={style}/>
           );
-      },
-      selectMovie: function(movie: Object) {
+      }
+
+      selectMovie(movie: Object) {
           /*if (Platform.OS === 'ios') {
             this.props.navigator.push({
               title: movie.title,
@@ -94,7 +114,8 @@ class Home extends Component {
             });
           }*/
           console.log("select movie is called");
-        },
+        }
+
     render() {
         return (
             <Container style={{backgroundColor: '#33AA99'}}>
@@ -120,12 +141,12 @@ class Home extends Component {
                      keyboardDismissMode="on-drag"
                      keyboardShouldPersistTaps={true}
                      showsVerticalScrollIndicator={false}
-                />;
+                />
                 </Content>
             </Container>
-        )
+        );
     }
-        renderRow: function(
+        renderRow(
             movie: Object,
             sectionID: number | string,
             rowID: number | string,
@@ -140,7 +161,7 @@ class Home extends Component {
                 movie={movie}
               />
             );
-    },
+    }
 }
 
 function bindAction(dispatch) {

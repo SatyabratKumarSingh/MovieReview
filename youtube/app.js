@@ -3,7 +3,7 @@
 var youtubeAPI = require("youtube-api")
   , YConfig = require("./config").youtube
   , FireConfig = require("./config").fbase;
- 
+
 const fs = require("fs")
     , readJson = require("r-json")
     , Lien = require("lien")
@@ -11,7 +11,7 @@ const fs = require("fs")
     , opn = require("opn")
     , prettyBytes = require("pretty-bytes")
     ;
-    
+
 const CREDENTIALS = readJson(`${__dirname}/credentials.json`);
 let server = new Lien({
     host: "localhost"
@@ -107,14 +107,14 @@ function saveData(result){
 		var vId = json.videoId;
 		var vTitle = json.title;
 		var vCreatedTime = Date.parse(json.publishedAt)/1000;
-		var thumbnails = json.thumbnails.default;
-	
+		var thumbnails = json.thumbnails.default.url;
+
 		videoValue.push(vTitle);
 		videoValue.push(thumbnails);
 		videoValue.push(vCreatedTime);
 
 
-// 		
+//
 		for(var i=0; i<videoKeys.length;i++){
 			if(typeof videoValue[i] == 'undefined'){
 				video[videoValue[i]] = '';
@@ -126,20 +126,20 @@ function saveData(result){
 		videoDict[vId] = video;
 
 	});
-	
+
 	// saving data to firebase
-	
+
 	async.series
-    ([  
+    ([
         function (callback)
         {
-        	saveToDatabaseWithRef(FireConfig.kDBVideoRef,videoDict);   
+        	saveToDatabaseWithRef(FireConfig.kDBVideoRef,videoDict);
             callback();
         }
-       
+
     ]
     ,
-    function(err) 
+    function(err)
     {
     	if(err != null){
     		saveLogs(FireConfig.kDBLogRef,createLog(err));
@@ -178,13 +178,13 @@ function saveLogs(childRef, data){
 
 
 // reading data from database
-// function readDataFromChild(childRef){
-// 	var ref = db.ref(childRef);
-// 	ref.on("value", function(snapshot) {
-//   		console.log(snapshot.val());
-// 	}, function (errorObject) {
-//   	console.log("The read failed: " + errorObject.code);
-// 	});
-// }
+function readDataFromChild(childRef){
+	var ref = db.ref(childRef);
+	ref.on("value", function(snapshot) {
+  		console.log(snapshot.val());
+	}, function (errorObject) {
+  	console.log("The read failed: " + errorObject.code);
+	});
+}
 
-
+// readDataFromChild(FireConfig.kDBVideoRef);

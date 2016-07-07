@@ -31,7 +31,7 @@ module.exports = StyleSheet.create({
      backgroundColor: '#dddddd',
      height: 93,
      marginRight: 10,
-     width: 60,
+     width: 110,
    },
    cellBorder: {
      backgroundColor: 'rgba(0, 0, 0, 0.1)',

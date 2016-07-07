@@ -1,6 +1,4 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
  * @flow
  */
 
@@ -10,7 +8,7 @@ import {
   StyleSheet,
   Text,
   View,
-  WebView 
+  WebView
 } from 'react-native';
 
 class MovieReview extends Component {
