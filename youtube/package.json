@@ -1,0 +1,22 @@
+{
+  "name": "youtube",
+  "version": "1.0.0",
+  "description": "fetch data from youtube",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sudhansu Singh",
+  "license": "MIT",
+  "dependencies": {
+    "youtube-api": "^2.0.2",
+    "bluebird": "3.2.2"
+  },
+   "devDependencies": {
+    "bug-killer": "^4.2.2",
+    "lien": "^1.0.1",
+    "opn": "^4.0.1",
+    "pretty-bytes": "^3.0.1",
+    "r-json": "^1.2.2"
+}
+}
