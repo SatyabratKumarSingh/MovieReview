@@ -22,6 +22,7 @@ var MovieCell = React.createClass({
    }
   //  console.log(this.props.movie.thumbnail);
    return (
+   /*
      <View>
        <TouchableElement
          onPress={this.props.onSelect}
@@ -46,6 +47,19 @@ var MovieCell = React.createClass({
          </View>
        </TouchableElement>
      </View>
+     */
+     <View style={styles.movie} >
+          <Image
+            source={{uri: this.props.movie.thumbnail}}
+            style={styles.thumbnail}
+          />
+          <View >
+            <Text 
+            style={styles.title}
+            numberOfLines={3}>{this.props.movie.title}</Text>
+            <Text style={styles.year}>{this.props.movie.createdDate}</Text>
+          </View>
+        </View>
    );
  }
 });

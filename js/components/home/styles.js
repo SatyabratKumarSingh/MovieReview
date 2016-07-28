@@ -11,5 +11,9 @@ module.exports = StyleSheet.create({
     text: {
         paddingBottom: 20,
         alignSelf: 'center'
-    }
+    },
+    listView: {
+    paddingTop: 20,
+   // backgroundColor: '#F5FCFF',
+  },
 });

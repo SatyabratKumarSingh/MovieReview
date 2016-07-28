@@ -19,6 +19,7 @@ import {
 } from 'react-native';
 const firebase = require('firebase');
 var FireConfig = require("../../../youtube/config").fbase;
+import GridView from 'react-native-grid-view' ;
 
 // Initialize Firebase
 
@@ -41,12 +42,16 @@ class Home extends Component {
       constructor(props) {
         console.log("constructor called");
         super(props);
-        this.state = {
-          dataSource: new ListView.DataSource({
-            rowHasChanged: (row1, row2) => row1 !== row2,
-          })
-        };
-        this.itemsRef = rootRef.child('videos');
+       //  this.state = {
+//           dataSource: new ListView.DataSource({
+//             rowHasChanged: (row1, row2) => row1 !== row2,
+//           })
+//         };
+		this.state = {
+     	 	dataSource: null,
+      		loaded: false,
+    	}
+        this.itemsRef = rootRef.child('trailers');
       }
 
       getRef() {
@@ -59,20 +64,26 @@ class Home extends Component {
         console.log("here");
 
         // get children as an array
-        var items = [];
+        var movies = [];
         snap.forEach((child) => {
-          items.push({
+          movies.push({
             title: child.val().title,
-            createdDate : child.val().createdDate,
-            thumbnail: child.val().thumbnail,
+            createdDate : child.val().year,
+            thumbnail: child.val().posters.packshot,
             _key: child.key
           });
-          console.log(items);
+          console.log("-------------------------------");
+          console.log(movies);
+          console.log("-------------------------------");
         });
 
-        this.setState({
-          dataSource: this.state.dataSource.cloneWithRows(items)
-        });
+        // this.setState({
+//           dataSource: this.state.dataSource.cloneWithRows(items)
+//         });
+			this.setState({
+          		dataSource: movies,
+          		loaded: true,
+        	});
 
       });
     }
@@ -117,6 +128,9 @@ class Home extends Component {
         }
 
     render() {
+    	if (!this.state.loaded) {
+      		return this.renderLoadingView();
+    	}
         return (
             <Container style={{backgroundColor: '#33AA99'}}>
                 <Header style={{backgroundColor: '#3D9970'}} foregroundColor="#fff" >
@@ -132,20 +146,25 @@ class Home extends Component {
                 </Header>
 
                 <Content padder>
-                <ListView
-                     ref="listview"
-                     renderSeparator={this.renderSeparator}
-                     dataSource={this.state.dataSource}
-                     renderRow={this.renderRow}
-                     automaticallyAdjustContentInsets={false}
-                     keyboardDismissMode="on-drag"
-                     keyboardShouldPersistTaps={true}
-                     showsVerticalScrollIndicator={false}
-                />
+                <GridView
+        			items={this.state.dataSource}
+        			itemsPerRow={3}
+        			renderItem={this.renderRow}
+        			style={styles.listView}
+      			/>
                 </Content>
             </Container>
         );
     }
+    renderLoadingView() {
+    	return (
+      	<View>
+       	 <Text>
+       	   Loading movies...
+      	  </Text>
+     	 </View>
+   	 );
+  	}
         renderRow(
             movie: Object,
             sectionID: number | string,

@@ -8,7 +8,7 @@ var { StyleSheet, Dimensions } = React;
 var deviceHeight = Dimensions.get('window').height;
 
 module.exports = StyleSheet.create({
-    textContainer: {
+  /*  textContainer: {
      flex: 1,
    },
    movieTitle: {
@@ -40,5 +40,28 @@ module.exports = StyleSheet.create({
    },
    listview: {
      flex: 1,
-   },
+   },*/
+    movie: {
+    height: 150,
+    flex: 1,
+    alignItems: 'center',
+    flexDirection: 'column',
+  },
+  title: {
+    fontSize: 10,
+    marginBottom: 8,
+    width: 90,
+    textAlign: 'center',
+  },
+  year: {
+    textAlign: 'center',
+  },
+  thumbnail: {
+    width: 53,
+    height: 81,
+  },
+  listView: {
+    paddingTop: 20,
+    backgroundColor: '#F5FCFF',
+  },
 });
