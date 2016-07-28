@@ -10,7 +10,7 @@
     "lodash": "^4.13.1",
     "moment": "^2.13.0",
     "native-base": "0.4.7",
-    "react": "^15.1.0",
+    "react": "^15.2.1",
     "react-native": "0.27.2",
     "react-native-button": "^1.6.0",
     "react-native-code-push": "^1.12.1-beta",
@@ -25,7 +25,8 @@
     "redux-persist": "^3.2.2",
     "redux-thunk": "^2.1.0",
     "rx": "^4.1.0",
-    "youtube-api": "^2.0.2"
+    "youtube-api": "^2.0.2",
+    "react-native-grid-view": "^0.4.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",
