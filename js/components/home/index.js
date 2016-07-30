@@ -72,10 +72,13 @@ class Home extends Component {
             thumbnail: child.val().posters.packshot,
             _key: child.key
           });
-          console.log("-------------------------------");
-          console.log(movies);
-          console.log("-------------------------------");
+          
         });
+          movies.push(...movies);
+		  movies.push(...movies);
+          console.log("-------------------------------");
+          console.log(movies.length);
+          console.log("-------------------------------");
 
         // this.setState({
 //           dataSource: this.state.dataSource.cloneWithRows(items)
