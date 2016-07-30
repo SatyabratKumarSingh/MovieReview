@@ -49,17 +49,29 @@ var MovieCell = React.createClass({
      </View>
      */
      <View style={styles.movie} >
-          <Image
-            source={{uri: this.props.movie.thumbnail}}
-            style={styles.thumbnail}
-          />
-          <View >
-            <Text 
-            style={styles.title}
-            numberOfLines={3}>{this.props.movie.title}</Text>
-            <Text style={styles.year}>{this.props.movie.createdDate}</Text>
-          </View>
-        </View>
+     <TouchableElement
+         onPress={this.props.onSelect}
+         onShowUnderlay={this.props.onHighlight}
+         onHideUnderlay={this.props.onUnhighlight}>
+         <View style={styles.row}>
+         	<View style={styles.textContainer}>
+         		<View style={styles.imageView}>
+          			<Image
+            			source={{uri: this.props.movie.thumbnail}}
+            			style={styles.thumbnail}
+          			/>
+          		</View>
+          		<View >
+            		<Text 
+            			style={styles.title}
+            			numberOfLines={3}>{this.props.movie.title}</Text>
+            			<Text style={styles.year}>{this.props.movie.createdDate}</Text>
+          		</View>
+          	</View>
+         </View>
+       </TouchableElement>
+    </View>
+        
    );
  }
 });

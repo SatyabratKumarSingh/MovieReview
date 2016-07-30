@@ -47,21 +47,41 @@ module.exports = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'column',
   },
-  title: {
+  year: {
     fontSize: 10,
     marginBottom: 8,
     width: 90,
     textAlign: 'center',
+    color: '#FFFFFF',
   },
-  year: {
+  title: {
     textAlign: 'center',
+    color: '#FFFFFF',
   },
   thumbnail: {
     width: 53,
     height: 81,
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   listView: {
     paddingTop: 20,
-    backgroundColor: '#F5FCFF',
+    backgroundColor: 'white',
+    alignItems: 'center',
   },
+  row: {
+     alignItems: 'center',
+     //backgroundColor: 'white',
+     flexDirection: 'row',
+     padding: 5,
+   },
+    textContainer: {
+     flex: 1,
+   },
+   imageView: {
+   	  borderRadius: 10,
+     justifyContent: 'center',
+     alignItems: 'center',
+   },
 });
